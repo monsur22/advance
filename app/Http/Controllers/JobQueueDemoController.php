@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Jobs\ProcessCSV;
 use App\Models\JobQueueDemo;
+use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 
 class JobQueueDemoController extends Controller
 {
@@ -47,6 +50,40 @@ class JobQueueDemoController extends Controller
         return 'done';
     }
 
+    public function redisget(){
+    // // Define a cache key for this data
+    // $cacheKey = 'job_data';
+
+    // // Check if the data is already cached
+    // if (cache()->has($cacheKey)) {
+    //     // If cached, retrieve and return the data
+    //     $data = cache($cacheKey);
+    //     return response()->json($data); // Return the cached data as a JSON response
+    // } else {
+    //     try {
+    //         // If not cached, attempt to retrieve the data from the database
+    //         $data = JobQueueDemo::get();
+
+    //         // Check if the database query was successful
+    //         if ($data !== null) {
+    //             // Cache the data for a specified number of minutes (e.g., 10 minutes)
+    //             cache()->put($cacheKey, $data, 10); // Cache for 10 minutes
+    //             return response()->json($data); // Return the data as a JSON response
+    //         } else {
+    //             dd("Cache miss: Data retrieval from the database failed");
+    //         }
+    //     } catch (Exception $e) {
+    //         // Handle any exceptions that may occur during database query
+    //         dd("Cache miss: Error occurred while retrieving data from the database: " . $e->getMessage());
+    //     }
+    // }
+
+
+
+        $data = JobQueueDemo::get();
+        return response()->json($data);
+
+    }
     /**
      * Show the form for creating a new resource.
      */

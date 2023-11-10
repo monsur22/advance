@@ -1,5 +1,7 @@
 <?php
 
+use App\Facades\Invoice;
+use App\Facades\InvoiceFacade;
 use App\Http\Controllers\JobQueueDemoController;
 use App\Livewire\Content\Home;
 use Illuminate\Support\Facades\Route;
@@ -25,3 +27,9 @@ Route::get('/home', Home::class);
 Route::get('/home', Home::class);
 Route::get('/upload',[JobQueueDemoController::class,'index']);
 Route::post('/upload',[JobQueueDemoController::class,'upload']);
+Route::get('/redis-demo',[JobQueueDemoController::class,'redisget']);
+
+//Custom Facades
+Route::get('/facades', function () {
+    echo InvoiceFacade::companyName();
+});
