@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\PostObserver;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+    protected $fillable = ['title', 'desc', 'slug', 'is_published'];
+
 
     // Local scope
 
@@ -25,5 +28,7 @@ class Post extends Model
         static::addGlobalScope('published', function (Builder $builder) {
             $builder->where('is_published', true);
         });
+
+        // static::observe(PostObserver::class);
     }
 }
